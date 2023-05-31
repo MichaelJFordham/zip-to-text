@@ -16,9 +16,12 @@ def flatten_files(input_dir, output_file):
                 with open(file_path, 'r') as in_file:
                     out_file.write('---------\n')
                     out_file.write("File: " + file + " \n\n") # Adds the file name before the content
-                    content = in_file.read()
-                    out_file.write(content)
-                    out_file.write('\n\n')  # Adds a newline after each file
+
+                    # If the content is not an image, video, or audio file, add it to the output file
+                    if not file_path.endswith(('.jpg', '.jpeg', '.png', '.gif', '.mp4', '.mov', '.mp3', '.wav')):
+                        content = in_file.read()
+                        out_file.write(content)
+                        out_file.write('\n\n')  # Adds a newline after each file
 
 # Convert a zipped folder to a text file
 def zip_to_text(zip_path, output_file):
